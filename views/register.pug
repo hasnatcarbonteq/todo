@@ -4,12 +4,10 @@ html
         title Register Page
     body
         h1 Enter Credentials to Sigh up
-        form(method="POST", action="/register")
+        form(method="POST", action="/user/register")
             input(type="hidden", name="_method", value="POST")
-            p First Name
-            input(type="text", name="firstName")
-            p Last Name
-            input(type="text", name="lastName")
+            p User Name
+            input(type="text", name="username")
             p Email
             input(type="email", name="email")
             p Password

@@ -1,8 +1,23 @@
 doctype html
 html
     head
-        title Jade Page
+        title Todo Page
     body
-        h1 This page is produced by Jade engine
+        h1 Your TODO list:
         p some paragraph here..
+        ul 
+            li 
+                input(type="checkbox", name="status") 
+                span some task
+            li 
+                input(type="checkbox", name="status") 
+                span another task
+        form(method="POST", action="/add-task")
+            input(type="hidden", name="_method", value="POST")
+            p Add task
+            input(type="text", name="task", placeholder="Add a task")
+            p Add Date
+            input(type="date", name="time", placeholder="dd/mm/yyyy")
+            p
+            input(type="submit", name="submit", value="Add task")
         
