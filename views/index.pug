@@ -4,15 +4,19 @@ html
         title Todo Page
     body
         h1 Your TODO list:
-        p some paragraph here..
-        ul 
-            li 
-                input(type="checkbox", name="status") 
-                span some task
-            li 
-                input(type="checkbox", name="status") 
-                span another task
-        form(method="POST", action="/add-task")
+        if data
+            form(method="GET", action="/logout")
+                input(type="hidden", name="_method", value="GET")
+                input(type="submit", name="logout", value="logout")
+        p token: #{data}
+        ul.todoList
+            each item in list
+                li.listItem
+                    input(type="checkbox", name="status", checked=(item.status===true ? "checked": undefined)) 
+                    span #{item.title}
+                    span #{item.dueDate}
+            
+        form(method="POST", action="/list/addItem")
             input(type="hidden", name="_method", value="POST")
             p Add task
             input(type="text", name="task", placeholder="Add a task")
