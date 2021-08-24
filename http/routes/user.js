@@ -3,6 +3,18 @@ const router = express.Router();
 
 const AuthController = require("../controllers/AuthController")
 
+router.get("/login", (req, res) => {
+    res.render('login')
+})
+
+router.get("/register", (req, res) => {
+    res.render('register')
+})
+
+router.get("/logout", (req, res) => {
+    req.session.destroy();
+    res.redirect('/user/login');
+})
 
 /**
  * @method - POST

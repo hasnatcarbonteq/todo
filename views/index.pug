@@ -5,16 +5,28 @@ html
     body
         h1 Your TODO list:
         if data
-            form(method="GET", action="/logout")
+            form(method="GET", action="/user/logout")
                 input(type="hidden", name="_method", value="GET")
                 input(type="submit", name="logout", value="logout")
         p token: #{data}
         ul.todoList
             each item in list
-                li.listItem
-                    input(type="checkbox", name="status", checked=(item.status===true ? "checked": undefined)) 
-                    span #{item.title}
-                    span #{item.dueDate}
+                if item.status
+                    li(style="background-color: #accec6 ; text-decoration: line-through;")
+                        form(method="POST", action="/list/updateList/"+item._id+"?_method=PUT")
+                            span #{item.title}
+                            span #{item.dueDate}
+                            button(type="submit") Un Done
+                        form(method="POST", action="/list/removeItem/"+item._id+"?_method=DELETE")
+                            button(type="submit") Delete
+                else 
+                    li(style="background-color: #fff ;")
+                        form(method="POST", action="/list/updateList/"+item._id+"?_method=PUT")
+                            span #{item.title}
+                            span #{item.dueDate}
+                            button(type="submit") Done
+                        form(method="POST", action="/list/removeItem/"+item._id+"?_method=DELETE")
+                            button(type="submit") Delete
             
         form(method="POST", action="/list/addItem")
             input(type="hidden", name="_method", value="POST")
